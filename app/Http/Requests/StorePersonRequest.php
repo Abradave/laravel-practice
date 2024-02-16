@@ -11,7 +11,7 @@ class StorePersonRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,13 @@ class StorePersonRequest extends FormRequest
      */
     public function rules(): array
     {
+        //validációk:
         return [
-            //
+            "name" => "required|string|max:100",
+            "email" => "required|email|max:200|unique:people,email",
+            "address" => "required|string|max:200",
+            "phone_number" => "required|string|max:20",
+            "birth_date" => "required|date|before:tomorrow",
         ];
     }
 }
