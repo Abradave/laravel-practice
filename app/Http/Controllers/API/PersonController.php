@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Person;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
@@ -12,7 +13,10 @@ class PersonController extends Controller
      */
     public function index()
     {
-        //
+        //return Person::all();
+        //ha meg akarunk győződni, hogy mindig json-t ad vissza:
+        $people =  Person::all();
+        return response()->json($people);
     }
 
     /**
