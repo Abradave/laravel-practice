@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePersonRequest;
+use App\Http\Requests\UpdatePersonRequest;
 use App\Models\Person;
 use Illuminate\Http\Request;
 
@@ -39,16 +40,23 @@ class PersonController extends Controller
     {
         $person = Person::find($id);
         if(is_null($person)){
-            return response()->json(["message" => "Person not found with id: $id"], 404);        }
+            return response()->json(["message" => "Person not found with id: $id"], 404);
+        }
         return $person;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePersonRequest $request, string $id)
     {
-        //
+        $person = Person::find($id);
+        if(is_null($person)){
+            return response()->json(["message" => "Person not found with id: $id"], 404);
+        }
+        $person->fill($request->all());
+        $person->save();
+        return $person;
     }
 
     /**
