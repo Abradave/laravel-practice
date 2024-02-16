@@ -23,7 +23,7 @@ class UpdatePersonRequest extends FormRequest
     {
         return [
             "name" => "string|max:100",
-            "email" => "email|max:200|unique:people,email",
+            "email" => "email|max:200",
             "address" => "string|max:200",
             "phone_number" => "string|max:20",
             "birth_date" => "date|before:tomorrow",
